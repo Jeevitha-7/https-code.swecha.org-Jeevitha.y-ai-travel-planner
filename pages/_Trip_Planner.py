@@ -2,6 +2,7 @@ import streamlit as st
 from utils.ai_generator import generate_itinerary
 from utils.budget_calculator import calculate_budget
 from utils.pdf_generator import generate_pdf
+from utils.map_utils import show_map
 
 # ----------------------------
 # Page Configuration
@@ -137,6 +138,15 @@ if st.button("🚀 Generate Itinerary", use_container_width=True):
     st.markdown(itinerary)
 
     st.markdown("---")
+
+st.header("📍 Destination Map")
+
+map_loaded = show_map(destination)
+
+if not map_loaded:
+    st.warning(
+        "Unable to load map for this destination."
+    )
 
     # ----------------------------
     # PDF Download

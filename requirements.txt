@@ -1,0 +1,8 @@
+streamlit
+google-generativeai
+python-dotenv
+reportlab
+pandas
+folium
+streamlit-folium
+geopy
