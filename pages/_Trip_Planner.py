@@ -1,7 +1,7 @@
 import streamlit as st
 from utils.ai_generator import generate_itinerary
 from utils.budget_calculator import calculate_budget
-
+from utils.pdf_generator import generate_pdf
 # ----------------------------
 # Page Configuration
 # ----------------------------
@@ -143,18 +143,18 @@ if st.button("🚀 Generate Itinerary", use_container_width=True):
     st.header("💡 Travel Tips")
 
     st.info(
-        """
-        • Book accommodations early.
+    """
+    • Book accommodations early.
 
-        • Keep emergency contacts handy.
+    • Keep emergency contacts handy.
 
-        • Carry essential documents.
+    • Carry essential documents.
 
-        • Check local weather before departure.
+    • Research local transportation options.
 
-        • Keep some extra budget for unexpected expenses.
-        """
-    )
+    • Keep some extra budget for unexpected expenses.
+    """
+)
 
     st.markdown("---")
 
