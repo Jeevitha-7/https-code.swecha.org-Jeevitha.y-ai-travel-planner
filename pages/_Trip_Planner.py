@@ -2,6 +2,7 @@ import streamlit as st
 from utils.ai_generator import generate_itinerary
 from utils.budget_calculator import calculate_budget
 from utils.pdf_generator import generate_pdf
+
 # ----------------------------
 # Page Configuration
 # ----------------------------
@@ -138,23 +139,46 @@ if st.button("🚀 Generate Itinerary", use_container_width=True):
     st.markdown("---")
 
     # ----------------------------
+    # PDF Download
+    # ----------------------------
+    pdf_file = generate_pdf(
+        destination=destination,
+        budget=budget,
+        days=days,
+        travelers=travelers,
+        itinerary=itinerary
+    )
+
+    with open(pdf_file, "rb") as file:
+
+        st.download_button(
+            label="📄 Download PDF Report",
+            data=file,
+            file_name=f"{destination}_trip_plan.pdf",
+            mime="application/pdf",
+            use_container_width=True
+        )
+
+    st.markdown("---")
+
+    # ----------------------------
     # Travel Tips
     # ----------------------------
     st.header("💡 Travel Tips")
 
     st.info(
-    """
-    • Book accommodations early.
+        """
+        • Book accommodations early.
 
-    • Keep emergency contacts handy.
+        • Keep emergency contacts handy.
 
-    • Carry essential documents.
+        • Carry essential documents.
 
-    • Research local transportation options.
+        • Research local transportation options.
 
-    • Keep some extra budget for unexpected expenses.
-    """
-)
+        • Keep some extra budget for unexpected expenses.
+        """
+    )
 
     st.markdown("---")
 
