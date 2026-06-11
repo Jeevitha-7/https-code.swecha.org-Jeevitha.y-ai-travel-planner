@@ -1,44 +1,122 @@
-# Environment Variables
-.env
+# ==========================
+# Python
+# ==========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
 
-# Virtual Environment
+# ==========================
+# Virtual Environments
+# ==========================
 venv/
 .venv/
+env/
+ENV/
 
-# Python Cache
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
+# ==========================
+# Environment Variables
+# ==========================
+.env
+.env.*
+!.env.example
 
+# ==========================
 # Streamlit
+# ==========================
 .streamlit/secrets.toml
 
-# Output Files
-outputs/
-generated_itinerary.pdf
-
-# Logs
-*.log
-
-# VS Code
+# ==========================
+# IDEs & Editors
+# ==========================
 .vscode/
-
-# JetBrains IDEs
 .idea/
+*.swp
+*.swo
 
+# ==========================
 # OS Files
+# ==========================
 .DS_Store
 Thumbs.db
+desktop.ini
 
-# Temporary Files
-temp/
-tmp/
-
-# Jupyter Notebooks
-.ipynb_checkpoints/
-
-# Build Files
+# ==========================
+# Python Build Files
+# ==========================
 build/
 dist/
 *.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# ==========================
+# Testing & Coverage
+# ==========================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# ==========================
+# Jupyter
+# ==========================
+.ipynb_checkpoints/
+
+# ==========================
+# Logs
+# ==========================
+*.log
+
+# ==========================
+# Outputs
+# ==========================
+outputs/
+generated_itinerary.pdf
+
+# ==========================
+# Temporary Files
+# ==========================
+tmp/
+temp/
+*.tmp
+
+# ==========================
+# Caches
+# ==========================
+.cache/
+.mypy_cache/
+.ruff_cache/
+
+# ==========================
+# Gitleaks Reports
+# ==========================
+gitleaks-report.json
+
+# ==========================
+# Bandit Reports
+# ==========================
+bandit-report.json
+
+# ==========================
+# pip-audit Reports
+# ==========================
+pip-audit-report.json
+
+# ==========================
+# Docker
+# ==========================
+docker-compose.override.yml
+
+# ==========================
+# Mac
+# ==========================
+.AppleDouble
+.LSOverride
+
+# ==========================
+# Windows
+# ==========================
+ehthumbs.db
