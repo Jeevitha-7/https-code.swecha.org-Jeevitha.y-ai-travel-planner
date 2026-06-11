@@ -1,4 +1,5 @@
 import streamlit as st
+from utils.translator import load_language
 
 # ----------------------------
 # Page Configuration
@@ -6,19 +7,33 @@ import streamlit as st
 st.set_page_config(page_title="Home | AI Travel Planner", page_icon="🏠", layout="wide")
 
 # ----------------------------
+# Language Selection
+# ----------------------------
+if "language" not in st.session_state:
+    st.session_state.language = "English"
+
+language = st.sidebar.selectbox(
+    "🌐 Select Language",
+    ["English", "Hindi", "Telugu"],
+    index=["English", "Hindi", "Telugu"].index(st.session_state.language),
+)
+
+st.session_state.language = language
+
+lang_map = {"English": "en", "Hindi": "hi", "Telugu": "te"}
+
+text = load_language(lang_map[language])
+
+# ----------------------------
 # Hero Section
 # ----------------------------
-st.title("✈️ AI Travel Planner")
+st.title(text["title"])
 
 st.markdown(
-    """
-    ## Plan Smarter. Travel Better.
+    f"""
+    ## {text["hero_heading"]}
 
-    Welcome to **AI Travel Planner**, your intelligent travel companion.
-
-    Generate personalized travel itineraries, optimize your budget,
-    discover attractions, check weather forecasts, and download
-    professional trip reports — all in one place.
+    {text["hero_description"]}
     """
 )
 
@@ -27,174 +42,96 @@ st.markdown("---")
 # ----------------------------
 # Features Section
 # ----------------------------
-st.header("🚀 Key Features")
+st.header(text["features"])
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.info(
-        """
-        ### 🗺️ AI Itinerary Generator
-
-        Generate complete day-wise travel plans based on:
-
-        - Destination
-        - Budget
-        - Duration
-        - Interests
-        """
-    )
+    st.info(text["feature1"])
 
 with col2:
-    st.info(
-        """
-        ### 💰 Budget Planning
-
-        Smart budget allocation for:
-
-        - Transport
-        - Hotels
-        - Food
-        - Activities
-        """
-    )
+    st.info(text["feature2"])
 
 with col3:
-    st.info(
-        """
-        ### 🤖 Travel Assistant
-
-        Ask questions such as:
-
-        - Best places to visit?
-        - Local food recommendations?
-        - Hidden attractions?
-        """
-    )
+    st.info(text["feature3"])
 
 st.markdown("---")
 
 # ----------------------------
 # How It Works
 # ----------------------------
-st.header("📍 How It Works")
+st.header(text["how_it_works"])
 
 step1, step2, step3 = st.columns(3)
 
 with step1:
-    st.success(
-        """
-        ### Step 1
-
-        Enter:
-
-        - Destination
-        - Budget
-        - Days
-        - Travelers
-        """
-    )
+    st.success(text["step1"])
 
 with step2:
-    st.success(
-        """
-        ### Step 2
-
-        Select:
-
-        - Travel Style
-        - Interests
-        - Preferences
-        """
-    )
+    st.success(text["step2"])
 
 with step3:
-    st.success(
-        """
-        ### Step 3
-
-        AI generates:
-
-        - Itinerary
-        - Budget Plan
-        - Travel Tips
-        """
-    )
+    st.success(text["step3"])
 
 st.markdown("---")
 
 # ----------------------------
 # Statistics
 # ----------------------------
-st.header("📊 Travel Insights")
+st.header(text["travel_insights"])
 
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    st.metric("Destinations", "100+")
+    st.metric(text["destinations"], "100+")
 
 with col2:
-    st.metric("Trips Planned", "1000+")
+    st.metric(text["trips"], "1000+")
 
 with col3:
-    st.metric("Countries", "50+")
+    st.metric(text["countries"], "50+")
 
 with col4:
-    st.metric("AI Accuracy", "95%")
+    st.metric(text["accuracy"], "95%")
 
 st.markdown("---")
 
 # ----------------------------
 # Popular Destinations
 # ----------------------------
-st.header("🌍 Popular Destinations")
+st.header(text["popular_destinations"])
 
 dest1, dest2, dest3 = st.columns(3)
 
 with dest1:
-    st.card = st.container()
-    with st.card:
+    with st.container():
         st.subheader("🏖️ Goa")
-        st.write("Beaches, nightlife, water sports, seafood.")
+        st.write(text["goa"])
 
 with dest2:
-    st.card = st.container()
-    with st.card:
+    with st.container():
         st.subheader("🏔️ Manali")
-        st.write("Mountains, adventure sports, scenic beauty.")
+        st.write(text["manali"])
 
 with dest3:
-    st.card = st.container()
-    with st.card:
+    with st.container():
         st.subheader("🏰 Jaipur")
-        st.write("Forts, palaces, culture, heritage sites.")
+        st.write(text["jaipur"])
 
 st.markdown("---")
 
 # ----------------------------
 # Quick Navigation
 # ----------------------------
-st.header("📌 Start Planning")
+st.header(text["start_planning"])
 
-st.write(
-    """
-    Use the navigation menu in the sidebar to access:
+st.write(text["navigation"])
 
-    - 🗺️ Trip Planner
-    - 💰 Budget Tracker
-    - 🤖 Travel Assistant
-    """
-)
-
-st.success(
-    "Click on 'Trip Planner' from the sidebar to generate your first AI-powered travel itinerary."
-)
+st.success(text["sidebar_message"])
 
 st.markdown("---")
 
 # ----------------------------
 # Footer
 # ----------------------------
-st.caption(
-    "AI Travel Planner • Built with Streamlit, Gemini AI, Weather APIs, and Interactive Maps"
-)
+st.caption(text["footer"])

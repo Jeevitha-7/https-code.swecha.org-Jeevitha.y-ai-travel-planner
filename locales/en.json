@@ -1,0 +1,96 @@
+{
+    "title": "✈️ AI Travel Planner",
+    "hero_heading": "Plan Smarter. Travel Better.",
+    "hero_description": "Welcome to AI Travel Planner, your intelligent travel companion. Generate personalized travel itineraries, optimize your budget, discover attractions, check weather forecasts and download professional trip reports.",
+    "features": "🚀 Key Features",
+
+    "feature1": "### 🗺️ AI Itinerary Generator\nGenerate complete day-wise travel plans based on destination, budget, duration and interests.",
+
+    "feature2": "### 💰 Budget Planning\nSmart budget allocation for transport, hotels, food and activities.",
+
+    "feature3": "### 🤖 Travel Assistant\nAsk questions like best places to visit, food recommendations and hidden attractions.",
+
+    "how_it_works": "📍 How It Works",
+
+    "step1": "### Step 1\nEnter destination, budget, days and travelers.",
+
+    "step2": "### Step 2\nSelect travel style, interests and preferences.",
+
+    "step3": "### Step 3\nAI generates itinerary, budget plan and travel tips.",
+
+    "travel_insights": "📊 Travel Insights",
+
+    "destinations": "Destinations",
+    "trips": "Trips Planned",
+    "countries": "Countries",
+    "accuracy": "AI Accuracy",
+
+    "popular_destinations": "🌍 Popular Destinations",
+
+    "goa": "Beaches, nightlife, water sports and seafood.",
+    "manali": "Mountains, adventure sports and scenic beauty.",
+    "jaipur": "Forts, palaces, culture and heritage sites.",
+
+    "start_planning": "📌 Start Planning",
+
+    "navigation": "Use the navigation menu in the sidebar to access Trip Planner, Budget Tracker and Travel Assistant.",
+
+    "sidebar_message": "Click on Trip Planner from the sidebar to generate your first AI-powered travel itinerary.",
+
+    "footer": "AI Travel Planner • Built with Streamlit, Gemini AI, Weather APIs and Interactive Maps",
+
+    "budget_tracker": "💰 Travel Budget Tracker",
+    "budget_description": "Track your travel expenses and monitor your remaining budget.",
+    "no_budget": "No trip budget found.\n\nPlease generate a trip first from the Trip Planner page.",
+
+    "total_budget": "Total Budget",
+    "spent": "Spent",
+    "remaining": "Remaining",
+
+    "add_expense": "➕ Add Expense",
+
+    "category": "Category",
+    "transport": "Transport",
+    "hotel": "Hotel",
+    "food": "Food",
+    "shopping": "Shopping",
+    "activities": "Activities",
+    "other": "Other",
+
+    "amount": "Amount (₹)",
+    "description": "Description",
+    "add_expense_btn": "Add Expense",
+    "expense_added": "Expense Added Successfully!",
+
+    "expense_history": "📋 Expense History",
+    "no_expenses": "No expenses added yet.",
+
+    "expense_breakdown": "📊 Expense Breakdown",
+    "add_expense_chart": "Add some expenses to see charts.",
+
+    "budget_status": "🚦 Budget Status",
+    "budget_used": "Budget Used:",
+
+    "excellent": "Excellent! You're within budget.",
+    "keep_eye": "Keep an eye on your spending.",
+    "almost_exhausted": "Budget is almost exhausted.",
+    "budget_exceeded": "You have exceeded your budget!",
+
+    "clear_expenses": "🗑️ Clear All Expenses",
+    "travel_assistant": "🤖 AI Travel Assistant",
+"travel_assistant_description": "Ask questions about your trip, destination, attractions, food, transportation, packing, weather, or travel tips.",
+"unknown_destination": "Unknown Destination",
+"current_destination": "Current Destination",
+"chat_placeholder": "Ask anything about your trip...",
+"thinking": "Thinking...",
+"suggested_questions": "💡 Suggested Questions",
+
+"q1": "What should I pack?",
+"q2": "Best local food to try?",
+"q3": "Any hidden attractions?",
+"q4": "How can I save money?",
+"q5": "Best time to visit?",
+"q6": "Local transportation options?",
+"q7": "Safety tips?",
+"q8": "Recommended restaurants?"
+}
