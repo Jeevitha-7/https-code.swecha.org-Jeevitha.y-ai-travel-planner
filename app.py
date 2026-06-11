@@ -3,11 +3,7 @@ import streamlit as st
 # ----------------------------
 # Page Configuration
 # ----------------------------
-st.set_page_config(
-    page_title="AI Travel Planner",
-    page_icon="✈️",
-    layout="wide"
-)
+st.set_page_config(page_title="AI Travel Planner", page_icon="✈️", layout="wide")
 
 # ----------------------------
 # Main Page
@@ -29,9 +25,7 @@ Plan your trips using AI.
 Use the sidebar to navigate through the application.
 """)
 
-st.success(
-    "Select a page from the sidebar to get started."
-)
+st.success("Select a page from the sidebar to get started.")
 
 st.markdown("---")
 
@@ -63,6 +57,4 @@ with col3:
 
 st.markdown("---")
 
-st.caption(
-    "Built with ❤️ using Streamlit and Gemini AI"
-)
+st.caption("Built with ❤️ using Streamlit and Gemini AI")

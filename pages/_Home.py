@@ -3,11 +3,7 @@ import streamlit as st
 # ----------------------------
 # Page Configuration
 # ----------------------------
-st.set_page_config(
-    page_title="Home | AI Travel Planner",
-    page_icon="🏠",
-    layout="wide"
-)
+st.set_page_config(page_title="Home | AI Travel Planner", page_icon="🏠", layout="wide")
 
 # ----------------------------
 # Hero Section

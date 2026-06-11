@@ -9,9 +9,7 @@ def show_map(destination):
     """
 
     try:
-        geolocator = Nominatim(
-            user_agent="ai_travel_planner"
-        )
+        geolocator = Nominatim(user_agent="ai_travel_planner")
 
         location = geolocator.geocode(destination)
 
@@ -21,22 +19,13 @@ def show_map(destination):
         latitude = location.latitude
         longitude = location.longitude
 
-        travel_map = folium.Map(
-            location=[latitude, longitude],
-            zoom_start=12
-        )
+        travel_map = folium.Map(location=[latitude, longitude], zoom_start=12)
 
         folium.Marker(
-            [latitude, longitude],
-            popup=destination,
-            tooltip=destination
+            [latitude, longitude], popup=destination, tooltip=destination
         ).add_to(travel_map)
 
-        st_folium(
-            travel_map,
-            width=700,
-            height=450
-        )
+        st_folium(travel_map, width=700, height=450)
 
         return True
 

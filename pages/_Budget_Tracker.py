@@ -4,17 +4,11 @@ import pandas as pd
 # ----------------------------
 # Page Configuration
 # ----------------------------
-st.set_page_config(
-    page_title="Budget Tracker",
-    page_icon="💰",
-    layout="wide"
-)
+st.set_page_config(page_title="Budget Tracker", page_icon="💰", layout="wide")
 
 st.title("💰 Travel Budget Tracker")
 
-st.write(
-    "Track your travel expenses and monitor your remaining budget."
-)
+st.write("Track your travel expenses and monitor your remaining budget.")
 
 st.markdown("---")
 
@@ -39,29 +33,17 @@ if "expenses" not in st.session_state:
 # ----------------------------
 # Budget Summary
 # ----------------------------
-spent = sum(
-    expense["amount"]
-    for expense in st.session_state["expenses"]
-)
+spent = sum(expense["amount"] for expense in st.session_state["expenses"])
 
 remaining = total_budget - spent
 
 col1, col2, col3 = st.columns(3)
 
-col1.metric(
-    "Total Budget",
-    f"₹{total_budget:,.0f}"
-)
+col1.metric("Total Budget", f"₹{total_budget:,.0f}")
 
-col2.metric(
-    "Spent",
-    f"₹{spent:,.0f}"
-)
+col2.metric("Spent", f"₹{spent:,.0f}")
 
-col3.metric(
-    "Remaining",
-    f"₹{remaining:,.0f}"
-)
+col3.metric("Remaining", f"₹{remaining:,.0f}")
 
 st.markdown("---")
 
@@ -71,41 +53,19 @@ st.markdown("---")
 st.header("➕ Add Expense")
 
 with st.form("expense_form"):
-
     category = st.selectbox(
-        "Category",
-        [
-            "Transport",
-            "Hotel",
-            "Food",
-            "Shopping",
-            "Activities",
-            "Other"
-        ]
+        "Category", ["Transport", "Hotel", "Food", "Shopping", "Activities", "Other"]
     )
 
-    amount = st.number_input(
-        "Amount (₹)",
-        min_value=0.0,
-        step=100.0
-    )
+    amount = st.number_input("Amount (₹)", min_value=0.0, step=100.0)
 
-    description = st.text_input(
-        "Description"
-    )
+    description = st.text_input("Description")
 
-    submitted = st.form_submit_button(
-        "Add Expense"
-    )
+    submitted = st.form_submit_button("Add Expense")
 
     if submitted:
-
         st.session_state["expenses"].append(
-            {
-                "category": category,
-                "amount": amount,
-                "description": description
-            }
+            {"category": category, "amount": amount, "description": description}
         )
 
         st.success("Expense Added Successfully!")
@@ -118,15 +78,9 @@ st.markdown("---")
 st.header("📋 Expense History")
 
 if st.session_state["expenses"]:
+    df = pd.DataFrame(st.session_state["expenses"])
 
-    df = pd.DataFrame(
-        st.session_state["expenses"]
-    )
-
-    st.dataframe(
-        df,
-        use_container_width=True
-    )
+    st.dataframe(df, use_container_width=True)
 
 else:
     st.info("No expenses added yet.")
@@ -139,25 +93,14 @@ st.markdown("---")
 st.header("📊 Expense Breakdown")
 
 if st.session_state["expenses"]:
+    df = pd.DataFrame(st.session_state["expenses"])
 
-    df = pd.DataFrame(
-        st.session_state["expenses"]
-    )
+    category_totals = df.groupby("category")["amount"].sum().reset_index()
 
-    category_totals = (
-        df.groupby("category")["amount"]
-        .sum()
-        .reset_index()
-    )
-
-    st.bar_chart(
-        category_totals.set_index("category")
-    )
+    st.bar_chart(category_totals.set_index("category"))
 
 else:
-    st.info(
-        "Add some expenses to see charts."
-    )
+    st.info("Add some expenses to see charts.")
 
 st.markdown("---")
 
@@ -166,19 +109,11 @@ st.markdown("---")
 # ----------------------------
 st.header("🚦 Budget Status")
 
-usage_percentage = (
-    spent / total_budget * 100
-    if total_budget > 0
-    else 0
-)
+usage_percentage = spent / total_budget * 100 if total_budget > 0 else 0
 
-st.progress(
-    min(int(usage_percentage), 100)
-)
+st.progress(min(int(usage_percentage), 100))
 
-st.write(
-    f"Budget Used: {usage_percentage:.1f}%"
-)
+st.write(f"Budget Used: {usage_percentage:.1f}%")
 
 if usage_percentage < 50:
     st.success("Excellent! You're within budget.")
@@ -194,9 +129,6 @@ st.markdown("---")
 # ----------------------------
 # Clear Expenses
 # ----------------------------
-if st.button(
-    "🗑️ Clear All Expenses",
-    use_container_width=True
-):
+if st.button("🗑️ Clear All Expenses", use_container_width=True):
     st.session_state["expenses"] = []
     st.rerun()

@@ -15,9 +15,7 @@ API_KEY = os.getenv("GEMINI_API_KEY")
 if API_KEY:
     genai.configure(api_key=API_KEY)
 
-    model = genai.GenerativeModel(
-        "gemini-2.5-flash"
-    )
+    model = genai.GenerativeModel("gemini-2.5-flash")
 else:
     model = None
 
@@ -25,14 +23,7 @@ else:
 # ----------------------------
 # Generate Itinerary
 # ----------------------------
-def generate_itinerary(
-    destination,
-    budget,
-    days,
-    travelers,
-    travel_style,
-    interests
-):
+def generate_itinerary(destination, budget, days, travelers, travel_style, interests):
     if model is None:
         return "❌ Gemini API key not found. Check your .env file."
 
@@ -66,11 +57,7 @@ def generate_itinerary(
 # ----------------------------
 # Travel Assistant
 # ----------------------------
-def travel_chat(
-    destination,
-    itinerary,
-    question
-):
+def travel_chat(destination, itinerary, question):
     if model is None:
         return "❌ Gemini API key not found. Check your .env file."
 

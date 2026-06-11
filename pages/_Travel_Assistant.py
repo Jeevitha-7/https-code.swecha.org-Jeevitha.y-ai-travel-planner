@@ -4,11 +4,7 @@ from utils.ai_generator import travel_chat
 # ----------------------------
 # Page Configuration
 # ----------------------------
-st.set_page_config(
-    page_title="Travel Assistant",
-    page_icon="🤖",
-    layout="wide"
-)
+st.set_page_config(page_title="Travel Assistant", page_icon="🤖", layout="wide")
 
 st.title("🤖 AI Travel Assistant")
 
@@ -25,15 +21,9 @@ st.markdown("---")
 # ----------------------------
 # Trip Context
 # ----------------------------
-destination = st.session_state.get(
-    "destination",
-    "Unknown Destination"
-)
+destination = st.session_state.get("destination", "Unknown Destination")
 
-itinerary = st.session_state.get(
-    "itinerary",
-    ""
-)
+itinerary = st.session_state.get("itinerary", "")
 
 st.info(f"Current Destination: {destination}")
 
@@ -47,49 +37,32 @@ if "chat_history" not in st.session_state:
 # Display Previous Messages
 # ----------------------------
 for message in st.session_state.chat_history:
-
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
 # ----------------------------
 # Chat Input
 # ----------------------------
-user_prompt = st.chat_input(
-    "Ask anything about your trip..."
-)
+user_prompt = st.chat_input("Ask anything about your trip...")
 
 if user_prompt:
-
     # Display User Message
     with st.chat_message("user"):
         st.markdown(user_prompt)
 
-    st.session_state.chat_history.append(
-        {
-            "role": "user",
-            "content": user_prompt
-        }
-    )
+    st.session_state.chat_history.append({"role": "user", "content": user_prompt})
 
     # Generate AI Response
     with st.spinner("Thinking..."):
-
         response = travel_chat(
-            destination=destination,
-            itinerary=itinerary,
-            question=user_prompt
+            destination=destination, itinerary=itinerary, question=user_prompt
         )
 
     # Display Assistant Message
     with st.chat_message("assistant"):
         st.markdown(response)
 
-    st.session_state.chat_history.append(
-        {
-            "role": "assistant",
-            "content": response
-        }
-    )
+    st.session_state.chat_history.append({"role": "assistant", "content": response})
 
 st.markdown("---")
 
