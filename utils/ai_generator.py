@@ -1,16 +1,30 @@
-import google.generativeai as genai
 import os
 from dotenv import load_dotenv
+import google.generativeai as genai
 
+# ----------------------------
+# Load Environment Variables
+# ----------------------------
 load_dotenv()
 
-genai.configure(
-    api_key=os.getenv("GEMINI_API_KEY")
-)
+# ----------------------------
+# Configure Gemini
+# ----------------------------
+API_KEY = os.getenv("GEMINI_API_KEY")
 
-model = genai.GenerativeModel("gemini-2.5-flash")
+if API_KEY:
+    genai.configure(api_key=API_KEY)
+
+    model = genai.GenerativeModel(
+        "gemini-2.5-flash"
+    )
+else:
+    model = None
 
 
+# ----------------------------
+# Generate Itinerary
+# ----------------------------
 def generate_itinerary(
     destination,
     budget,
@@ -19,6 +33,8 @@ def generate_itinerary(
     travel_style,
     interests
 ):
+    if model is None:
+        return "❌ Gemini API key not found. Check your .env file."
 
     prompt = f"""
     Create a detailed travel itinerary.
@@ -28,18 +44,54 @@ def generate_itinerary(
     Days: {days}
     Travelers: {travelers}
     Travel Style: {travel_style}
-    Interests: {', '.join(interests)}
+    Interests: {", ".join(interests)}
 
     Include:
     - Day-wise itinerary
-    - Recommended attractions
-    - Food suggestions
-    - Estimated costs
+    - Places to visit
+    - Food recommendations
     - Travel tips
 
-    Format in markdown.
+    Format using Markdown.
     """
 
-    response = model.generate_content(prompt)
+    try:
+        response = model.generate_content(prompt)
+        return response.text
 
-    return response.text
+    except Exception as e:
+        return f"❌ Error generating itinerary: {str(e)}"
+
+
+# ----------------------------
+# Travel Assistant
+# ----------------------------
+def travel_chat(
+    destination,
+    itinerary,
+    question
+):
+    if model is None:
+        return "❌ Gemini API key not found. Check your .env file."
+
+    prompt = f"""
+    You are an expert travel assistant.
+
+    Destination:
+    {destination}
+
+    Current Itinerary:
+    {itinerary}
+
+    User Question:
+    {question}
+
+    Give a helpful travel-related answer.
+    """
+
+    try:
+        response = model.generate_content(prompt)
+        return response.text
+
+    except Exception as e:
+        return f"❌ Error generating response: {str(e)}"
