@@ -1,162 +1,147 @@
 import streamlit as st
-from pathlib import Path
+from utils.ai_generator import generate_itinerary
+from utils.budget_calculator import allocate_budget
 
-# ----------------------------
 # Page Configuration
-# ----------------------------
 st.set_page_config(
     page_title="AI Travel Planner",
     page_icon="✈️",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    layout="wide"
 )
 
-# ----------------------------
 # Load Custom CSS
-# ----------------------------
-css_file = Path("assets/styles.css")
-
-if css_file.exists():
-    with open(css_file) as f:
+try:
+    with open("assets/style.css") as f:
         st.markdown(
             f"<style>{f.read()}</style>",
             unsafe_allow_html=True
         )
+except:
+    pass
 
-# ----------------------------
 # Sidebar
-# ----------------------------
+try:
+    st.sidebar.image("assets/logo.png", width=150)
+except:
+    pass
+
 st.sidebar.title("✈️ AI Travel Planner")
-
-st.sidebar.markdown("---")
-
-st.sidebar.info(
-    """
-    Plan your trips with AI.
-
-    Features:
-    - AI Itinerary Generator
-    - Budget Planner
-    - Travel Assistant
-    - Weather Information
-    - PDF Reports
-    """
+st.sidebar.write(
+    "Plan your perfect trip with AI based on your budget and interests."
 )
 
-st.sidebar.markdown("---")
+# Banner
+try:
+    st.image("assets/banner.jpg", use_container_width=True)
+except:
+    pass
 
-st.sidebar.success(
-    "Use the navigation menu above to explore the app."
-)
-
-# ----------------------------
-# Main Page
-# ----------------------------
-st.title("✈️ AI Travel Planner")
-
+# Main Title
+st.title("🌍 AI Travel Planner")
 st.markdown(
-    """
-    ### Plan Your Dream Trip in Seconds
-
-    AI Travel Planner helps you create personalized travel itineraries
-    based on your destination, budget, trip duration, and interests.
-
-    Generate:
-    - 🗺️ Day-wise Travel Plans
-    - 💰 Budget Allocation
-    - 🌤️ Weather Insights
-    - 📄 Downloadable PDF Reports
-    - 🤖 AI Travel Assistance
-    """
+    "Enter your travel details and get a personalized itinerary."
 )
 
-# ----------------------------
-# Hero Section
-# ----------------------------
-col1, col2 = st.columns([2, 1])
+# User Inputs
+col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("Why Use AI Travel Planner?")
+    destination = st.text_input(
+        "📍 Destination",
+        placeholder="e.g., Goa"
+    )
 
-    st.write(
-        """
-        Planning a trip can be time-consuming.
-
-        Our AI assistant creates complete itineraries
-        tailored to your preferences, helping you save
-        time and stay within budget.
-        """
+    budget = st.number_input(
+        "💰 Budget (₹)",
+        min_value=1000,
+        value=10000,
+        step=1000
     )
 
 with col2:
-    st.metric("Trips Planned", "100+")
-    st.metric("Destinations", "50+")
-    st.metric("Happy Travelers", "500+")
-
-st.markdown("---")
-
-# ----------------------------
-# Features
-# ----------------------------
-st.header("🚀 Features")
-
-feature1, feature2, feature3 = st.columns(3)
-
-with feature1:
-    st.info(
-        """
-        ### 🗺️ Trip Planner
-
-        Generate detailed day-wise travel itineraries
-        using AI.
-        """
+    days = st.number_input(
+        "📅 Number of Days",
+        min_value=1,
+        max_value=30,
+        value=3
     )
 
-with feature2:
-    st.info(
-        """
-        ### 💰 Budget Tracker
-
-        Allocate and monitor your travel expenses.
-        """
+    style = st.selectbox(
+        "🏨 Travel Style",
+        ["Budget", "Standard", "Luxury"]
     )
 
-with feature3:
-    st.info(
-        """
-        ### 🤖 Travel Assistant
-
-        Ask travel-related questions and get
-        instant AI-powered answers.
-        """
-    )
-
-st.markdown("---")
-
-# ----------------------------
-# Quick Start
-# ----------------------------
-st.header("📍 Quick Start")
-
-st.write(
-    """
-    1. Open **Trip Planner** from the sidebar.
-    2. Enter your destination.
-    3. Set your budget and trip duration.
-    4. Select your interests.
-    5. Click Generate Trip.
-    """
+interests = st.multiselect(
+    "🎯 Interests",
+    [
+        "Adventure",
+        "Food",
+        "Nature",
+        "Shopping",
+        "Historical Places",
+        "Beaches",
+        "Wildlife",
+        "Photography"
+    ]
 )
 
-st.success(
-    "Navigate to 'Trip Planner' from the sidebar to start planning your trip."
-)
+# Generate Button
+if st.button("🚀 Generate Travel Plan"):
 
-# ----------------------------
+    if not destination:
+        st.warning("Please enter a destination.")
+        st.stop()
+
+    # Budget Breakdown
+    st.subheader("💰 Budget Breakdown")
+
+    allocation = allocate_budget(budget)
+
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.metric(
+            "Travel",
+            f"₹{allocation['Travel']:.0f}"
+        )
+
+    with col2:
+        st.metric(
+            "Hotel",
+            f"₹{allocation['Hotel']:.0f}"
+        )
+
+    with col3:
+        st.metric(
+            "Food",
+            f"₹{allocation['Food']:.0f}"
+        )
+
+    with col4:
+        st.metric(
+            "Activities",
+            f"₹{allocation['Activities']:.0f}"
+        )
+
+    st.divider()
+
+    # Generate AI Itinerary
+    with st.spinner("Generating your personalized travel plan..."):
+
+        itinerary = generate_itinerary(
+            destination=destination,
+            budget=budget,
+            days=days,
+            interests=", ".join(interests),
+            style=style
+        )
+
+    st.subheader("🗺️ Your AI Travel Itinerary")
+
+    st.markdown(itinerary)
+
+    st.success("Travel plan generated successfully!")
+
 # Footer
-# ----------------------------
 st.markdown("---")
-
-st.caption(
-    "Built with ❤️ using Streamlit, Gemini AI, OpenWeather API, and Folium."
-)
+st.caption("Built with ❤️ using Streamlit and Gemini AI")
