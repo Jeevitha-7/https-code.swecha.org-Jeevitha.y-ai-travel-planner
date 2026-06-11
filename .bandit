@@ -3,3 +3,4 @@ exclude_dirs:
   - venv
   - __pycache__
   - tests
+  - .ruff_cache
