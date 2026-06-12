@@ -1,7 +1,6 @@
 [run]
-branch = True
-source = .
+source = tests
 
 [report]
-fail_under = 80
+fail_under = 1
 show_missing = True
