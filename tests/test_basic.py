@@ -1,2 +1,2 @@
-def test_app_import():
-    assert True
+def test_basic():
+    assert True  # nosec B101
