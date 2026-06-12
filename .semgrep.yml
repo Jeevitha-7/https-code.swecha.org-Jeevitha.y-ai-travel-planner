@@ -1,0 +1,9 @@
+cat > .semgrep.yml << 'EOF'
+rules:
+  - id: python-security-check
+    pattern: eval(...)
+    message: Avoid using eval()
+    severity: ERROR
+    languages:
+      - python
+EOF
