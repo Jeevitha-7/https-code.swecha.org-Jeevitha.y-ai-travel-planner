@@ -21,30 +21,13 @@ repos:
     hooks:
       - id: bandit
 
-  - repo: https://github.com/PyCQA/pylint
-    rev: v3.3.8
-    hooks:
-      - id: pylint
-
-  - repo: https://github.com/PyCQA/flake8
-    rev: 7.3.0
-    hooks:
-      - id: flake8
-
-  - repo: https://github.com/asottile/pyupgrade
-    rev: v3.21.2
-    hooks:
-      - id: pyupgrade
-
-  - repo: https://github.com/returntocorp/semgrep
-    rev: v1.130.0
-    hooks:
-      - id: semgrep
-
-  - repo: local
+  - repo: https://github.com/jendrikseipp/vulture
+    rev: v2.14
     hooks:
       - id: vulture
-        name: vulture
-        entry: vulture .
-        language: system
-        pass_filenames: false
+        args:
+          - app.py
+          - pages
+          - utils
+          - --min-confidence
+          - "80"

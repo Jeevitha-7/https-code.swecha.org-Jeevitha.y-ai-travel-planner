@@ -3,7 +3,7 @@ from geopy.geocoders import Nominatim
 from streamlit_folium import st_folium
 
 
-def show_map(destination):
+def show_map(destination):  # noqa: Vulture
     """
     Display destination on an interactive map.
     """

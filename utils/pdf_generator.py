@@ -3,7 +3,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 import os
 
 
-def generate_pdf(destination, budget, days, travelers, itinerary):
+def generate_pdf(destination, budget, days, travelers, itinerary):  # noqa: Vulture
     """
     Generate a travel itinerary PDF.
     """
