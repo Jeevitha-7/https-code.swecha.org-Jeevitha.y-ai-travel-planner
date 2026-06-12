@@ -2,11 +2,12 @@ image: python:3.12
 
 stages:
   - quality
+  - security
 
 before_script:
   - python --version
   - pip install -r requirements.txt
-  - pip install ruff mypy bandit pylint flake8
+  - pip install ruff mypy bandit pylint flake8 pip-audit
 
 quality:
   stage: quality
@@ -16,3 +17,14 @@ quality:
     - bandit -r .
     - pylint app.py pages utils
     - flake8 .
+
+dependency_audit:
+  stage: security
+  script:
+    - pip-audit
+
+gitleaks:
+  stage: security
+  image: zricethezav/gitleaks:latest
+  script:
+    - gitleaks detect --source . --verbose
