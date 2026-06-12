@@ -1,0 +1,18 @@
+image: python:3.12
+
+stages:
+  - quality
+
+before_script:
+  - python --version
+  - pip install -r requirements.txt
+  - pip install ruff mypy bandit pylint flake8
+
+quality:
+  stage: quality
+  script:
+    - ruff check .
+    - mypy .
+    - bandit -r .
+    - pylint app.py pages utils
+    - flake8 .
