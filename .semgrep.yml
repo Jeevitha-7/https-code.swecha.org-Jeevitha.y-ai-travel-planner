@@ -1,1 +1,7 @@
-rules: []
+rules:
+  - id: python-security-check
+    pattern: eval(...)
+    message: Avoid using eval()
+    languages:
+      - python
+    severity: ERROR
