@@ -1,7 +1,7 @@
 rules:
-  - id: python-security-check
+  - id: avoid-eval
     pattern: eval(...)
-    message: Avoid using eval()
+    message: Avoid eval()
     languages:
       - python
     severity: ERROR
