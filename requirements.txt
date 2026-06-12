@@ -14,3 +14,6 @@ pylint
 flake8
 pyupgrade
 semgrep
+pytest
+pytest-cov
+coverage
