@@ -1,33 +1,21 @@
 import folium
 from geopy.geocoders import Nominatim
-from streamlit_folium import st_folium
 
 
-def show_map(destination):  # noqa: Vulture
-    """
-    Display destination on an interactive map.
-    """
+def get_map(location: str = "India"):
+    # FIX: handle empty input safely
+    if not location:
+        location = "India"
 
-    try:
-        geolocator = Nominatim(user_agent="ai_travel_planner")
+    geolocator = Nominatim(user_agent="travel_app")
+    loc = geolocator.geocode(location)
 
-        location = geolocator.geocode(destination)
+    # fallback if geocoding fails
+    if not loc:
+        loc = geolocator.geocode("India")
 
-        if not location:
-            return False
+    if not loc:
+        return None
 
-        latitude = location.latitude
-        longitude = location.longitude
-
-        travel_map = folium.Map(location=[latitude, longitude], zoom_start=12)
-
-        folium.Marker(
-            [latitude, longitude], popup=destination, tooltip=destination
-        ).add_to(travel_map)
-
-        st_folium(travel_map, width=700, height=450)
-
-        return True
-
-    except Exception:
-        return False
+    m = folium.Map(location=[loc.latitude, loc.longitude], zoom_start=5)
+    return m
