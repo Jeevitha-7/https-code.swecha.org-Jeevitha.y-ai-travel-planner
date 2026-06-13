@@ -19,6 +19,17 @@ language = st.sidebar.selectbox(
 )
 
 st.session_state.language = language
+# ----------------------------
+# AI Provider Selection
+# ----------------------------
+if "ai_provider" not in st.session_state:
+    st.session_state.ai_provider = "Gemini"
+
+st.session_state.ai_provider = st.sidebar.selectbox(
+    "🤖 AI Provider",
+    ["Gemini", "Ollama"],
+    index=["Gemini", "Ollama"].index(st.session_state.ai_provider),
+)
 
 lang_map = {"English": "en", "Hindi": "hi", "Telugu": "te"}
 

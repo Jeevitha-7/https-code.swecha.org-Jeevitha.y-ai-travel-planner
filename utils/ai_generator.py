@@ -1,17 +1,47 @@
 import os
+
+import streamlit as st
 from dotenv import load_dotenv
 from google import genai
+from ollama import chat
 
-# Load environment variables
+# -----------------------------
+# Load Environment Variables
+# -----------------------------
 load_dotenv()
 
 # Gemini API Key
 api_key = os.getenv("GEMINI_API_KEY")
 
-# Initialize Gemini client
+# Initialize Gemini Client
 client = genai.Client(api_key=api_key)
 
 
+# -----------------------------
+# Ollama Function
+# -----------------------------
+def generate_with_ollama(prompt):
+    """
+    Generate response using local Ollama model.
+    Make sure 'ollama serve' is running.
+    """
+
+    response = chat(
+        model="llama3.2",
+        messages=[
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        ],
+    )
+
+    return response["message"]["content"]
+
+
+# -----------------------------
+# Generate Travel Itinerary
+# -----------------------------
 def generate_itinerary(
     destination,
     budget,
@@ -22,11 +52,11 @@ def generate_itinerary(
     language="English",
 ):
     """
-    Generate an AI-powered travel itinerary.
+    Generate AI-powered travel itinerary using
+    Gemini or Ollama based on sidebar selection.
     """
 
-    try:
-        prompt = f"""
+    prompt = f"""
 You are an expert travel planner.
 
 Generate a complete {days}-day travel itinerary.
@@ -38,7 +68,7 @@ Travel Style: {travel_style}
 Interests: {", ".join(interests)}
 
 IMPORTANT:
-- Respond ONLY in {language}.
+- Respond ONLY in {language}
 - Include:
 1. Day-wise itinerary
 2. Places to visit
@@ -50,6 +80,18 @@ IMPORTANT:
 8. Safety tips
 """
 
+    provider = st.session_state.get("ai_provider", "Gemini")
+
+    try:
+        # -----------------------------
+        # Use Ollama
+        # -----------------------------
+        if provider == "Ollama":
+            return generate_with_ollama(prompt)
+
+        # -----------------------------
+        # Use Gemini
+        # -----------------------------
         response = client.models.generate_content(
             model="gemini-2.5-flash",
             contents=prompt,
@@ -58,13 +100,20 @@ IMPORTANT:
         return response.text
 
     except Exception as e:
-        return f"❌ Error generating itinerary: {e}"
+        # -----------------------------
+        # Automatic fallback
+        # -----------------------------
+        try:
+            return generate_with_ollama(prompt)
+
+        except Exception:
+            return f"❌ Error generating itinerary:\n{e}"
 
 
+# -----------------------------
+# Basic Placeholder
+# -----------------------------
 def generate_plan(destination, days):
-    """
-    Basic placeholder plan.
-    """
     return {
         "destination": destination,
         "days": days,
@@ -72,19 +121,22 @@ def generate_plan(destination, days):
     }
 
 
+# -----------------------------
+# Travel Assistant Chat
+# -----------------------------
 def travel_chat(destination, question, itinerary=None):
     """
-    AI Travel Assistant chat.
+    AI Travel Assistant.
+    Uses Gemini or Ollama.
     """
 
-    try:
-        prompt = f"""
+    prompt = f"""
 You are an expert travel assistant.
 
 Destination:
 {destination}
 
-Itinerary:
+Existing Itinerary:
 {itinerary if itinerary else "No itinerary available."}
 
 User Question:
@@ -93,6 +145,18 @@ User Question:
 Answer clearly and helpfully.
 """
 
+    provider = st.session_state.get("ai_provider", "Gemini")
+
+    try:
+        # -----------------------------
+        # Use Ollama
+        # -----------------------------
+        if provider == "Ollama":
+            return generate_with_ollama(prompt)
+
+        # -----------------------------
+        # Use Gemini
+        # -----------------------------
         response = client.models.generate_content(
             model="gemini-2.5-flash",
             contents=prompt,
@@ -101,4 +165,11 @@ Answer clearly and helpfully.
         return response.text
 
     except Exception as e:
-        return f"❌ Error: {e}"
+        # -----------------------------
+        # Automatic fallback
+        # -----------------------------
+        try:
+            return generate_with_ollama(prompt)
+
+        except Exception:
+            return f"❌ Error:\n{e}"

@@ -92,5 +92,68 @@
 "q5": "Best time to visit?",
 "q6": "Local transportation options?",
 "q7": "Safety tips?",
-"q8": "Recommended restaurants?"
+"q8": "Recommended restaurants?",
+"app_title": "✈️ AI Travel Planner",
+
+"welcome_heading": "Welcome to AI Travel Planner",
+
+"welcome_description": "Plan your trips using AI.",
+
+"features_heading": "Features",
+
+"feature_trip_planner": "AI Trip Planner",
+
+"feature_budget_tracker": "Budget Tracker",
+
+"feature_travel_assistant": "Travel Assistant",
+
+"feature_pdf": "PDF Download",
+
+"feature_maps": "Destination Maps",
+
+"sidebar_navigation": "Use the sidebar to navigate through the application.",
+
+"select_page": "Select a page from the sidebar to get started.",
+
+"trip_planner": "Trip Planner",
+
+"trip_planner_info": "Generate day-wise itineraries using Gemini AI or Ollama.",
+
+"budget_tracker_info": "Track travel expenses and spending.",
+
+"travel_assistant_info": "Ask questions about your destination.",
+
+"app_footer": "Built with ❤️ using Streamlit and Gemini AI",
+  "app_title": "✈️ एआई ट्रैवल प्लानर",
+
+  "welcome_heading": "एआई ट्रैवल प्लानर में आपका स्वागत है",
+
+  "welcome_description": "एआई की मदद से अपनी यात्रा की योजना बनाएं।",
+
+  "features_heading": "विशेषताएँ",
+
+  "feature_trip_planner": "एआई ट्रिप प्लानर",
+
+  "feature_budget_tracker": "बजट ट्रैकर",
+
+  "feature_travel_assistant": "ट्रैवल असिस्टेंट",
+
+  "feature_pdf": "पीडीएफ डाउनलोड",
+
+  "feature_maps": "डेस्टिनेशन मैप्स",
+
+  "sidebar_navigation": "ऐप का उपयोग करने के लिए साइडबार का उपयोग करें।",
+
+  "select_page": "शुरू करने के लिए साइडबार से एक पेज चुनें।",
+
+  "trip_planner": "ट्रिप प्लानर",
+
+  "trip_planner_info": "जेमिनी एआई या ओलामा का उपयोग करके दिन-वार यात्रा योजना बनाएं।",
+
+  "budget_tracker_info": "यात्रा खर्च और बजट को ट्रैक करें।",
+
+  "travel_assistant_info": "अपने डेस्टिनेशन के बारे में सवाल पूछें।",
+
+  "app_footer": "❤️ के साथ बनाया गया Streamlit और Gemini AI द्वारा"
+
 }

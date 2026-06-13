@@ -1,60 +1,92 @@
 import streamlit as st
+from utils.translator import load_language
 
 # ----------------------------
 # Page Configuration
 # ----------------------------
-st.set_page_config(page_title="AI Travel Planner", page_icon="✈️", layout="wide")
+st.set_page_config(
+    page_title="AI Travel Planner",
+    page_icon="✈️",
+    layout="wide",
+)
+
+# ----------------------------
+# Language Selection
+# ----------------------------
+if "language" not in st.session_state:
+    st.session_state.language = "English"
+
+st.session_state.language = st.sidebar.selectbox(
+    "🌐 Select Language",
+    ["English", "Hindi", "Telugu"],
+    index=["English", "Hindi", "Telugu"].index(st.session_state.language),
+    key="app_language",
+)
+
+lang_map = {
+    "English": "en",
+    "Hindi": "hi",
+    "Telugu": "te",
+}
+
+text = load_language(lang_map[st.session_state.language])
 
 # ----------------------------
 # Main Page
 # ----------------------------
-st.title("✈️ AI Travel Planner")
+st.title(text["app_title"])
 
-st.markdown("""
-## Welcome to AI Travel Planner
+st.markdown(
+    f"""
+## {text["welcome_heading"]}
 
-Plan your trips using AI.
+{text["welcome_description"]}
 
-### Features
-- 🗺️ AI Trip Planner
-- 💰 Budget Tracker
-- 🤖 Travel Assistant
-- 📄 PDF Download
-- 📍 Destination Maps
+### {text["features_heading"]}
 
-Use the sidebar to navigate through the application.
-""")
+- 🗺️ {text["feature_trip_planner"]}
+- 💰 {text["feature_budget_tracker"]}
+- 🤖 {text["feature_travel_assistant"]}
+- 📄 {text["feature_pdf"]}
+- 📍 {text["feature_maps"]}
 
-st.success("Select a page from the sidebar to get started.")
+{text["sidebar_navigation"]}
+"""
+)
+
+st.success(text["select_page"])
 
 st.markdown("---")
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.info("""
-    ### 🗺️ Trip Planner
+    st.info(
+        f"""
+### 🗺️ {text["trip_planner"]}
 
-    Generate day-wise itineraries
-    using Gemini AI.
-    """)
+{text["trip_planner_info"]}
+"""
+    )
 
 with col2:
-    st.info("""
-    ### 💰 Budget Tracker
+    st.info(
+        f"""
+### 💰 {text["budget_tracker"]}
 
-    Track travel expenses
-    and spending.
-    """)
+{text["budget_tracker_info"]}
+"""
+    )
 
 with col3:
-    st.info("""
-    ### 🤖 Travel Assistant
+    st.info(
+        f"""
+### 🤖 {text["travel_assistant"]}
 
-    Ask questions about
-    your destination.
-    """)
+{text["travel_assistant_info"]}
+"""
+    )
 
 st.markdown("---")
 
-st.caption("Built with ❤️ using Streamlit and Gemini AI")
+st.caption(text["app_footer"])

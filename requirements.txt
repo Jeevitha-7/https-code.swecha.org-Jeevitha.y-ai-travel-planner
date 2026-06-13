@@ -17,3 +17,4 @@ semgrep
 pytest
 pytest-cov
 coverage
+pip install ollama
