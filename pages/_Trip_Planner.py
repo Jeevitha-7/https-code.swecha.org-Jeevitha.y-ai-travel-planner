@@ -7,6 +7,7 @@ st.set_page_config(page_title="Trip Planner", page_icon="🗺️", layout="wide"
 st.title("🗺️ AI Trip Planner")
 st.write("Generate a personalized travel itinerary using AI.")
 
+# ---------------- Inputs ----------------
 destination = st.text_input("📍 Destination")
 
 budget = st.number_input("💰 Budget (₹)", min_value=1000, value=10000)
@@ -31,31 +32,35 @@ interests = st.multiselect(
     ],
 )
 
+# ---------------- Button ----------------
 if st.button("🚀 Generate Itinerary"):
-    budget_data = calculate_budget(budget)
+    if not destination:
+        st.error("Please enter destination")
+        st.stop()
 
+    # FIXED function call
+    budget_data = calculate_budget(budget, days)
+
+    # FIXED variables (no undefined names)
     itinerary = generate_itinerary(
-        destination=destination,
-        budget=budget,
-        days=days,
-        travelers=travelers,
-        travel_style=travel_style,
-        interests=interests,
+        destination, budget, days, travelers, travel_style.lower(), interests
     )
 
+    # Save in session
     st.session_state["budget"] = budget
     st.session_state["itinerary"] = itinerary
     st.session_state["destination"] = destination
 
     st.success("Trip generated successfully!")
 
+    # ---------------- Budget ----------------
     st.subheader("💰 Budget Breakdown")
 
-    st.write(f"Transport: ₹{budget_data['transport']}")
-    st.write(f"Hotel: ₹{budget_data['hotel']}")
-    st.write(f"Food: ₹{budget_data['food']}")
-    st.write(f"Activities: ₹{budget_data['activities']}")
+    st.write(f"Transport: ₹{budget_data}")
+    st.write(f"Hotel: ₹{budget_data}")
+    st.write(f"Food: ₹{budget_data}")
+    st.write(f"Activities: ₹{budget_data}")
 
+    # ---------------- Itinerary ----------------
     st.subheader("🗺️ AI Generated Itinerary")
-
     st.markdown(itinerary)

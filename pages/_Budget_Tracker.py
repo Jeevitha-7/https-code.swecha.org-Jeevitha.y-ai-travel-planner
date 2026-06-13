@@ -27,7 +27,7 @@ text = load_language(lang_map[st.session_state.language])
 # ----------------------------
 # Title
 # ----------------------------
-st.title(text["budget_tracker"])
+st.title(text.get("budget_tracker", "Budget Tracker"))
 
 st.write(text["budget_description"])
 

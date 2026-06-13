@@ -1,93 +1,104 @@
 import os
 from dotenv import load_dotenv
-import google.generativeai as genai
+from google import genai
 
-# ----------------------------
-# Load Environment Variables
-# ----------------------------
+# Load environment variables
 load_dotenv()
 
-# ----------------------------
-# Configure Gemini
-# ----------------------------
-API_KEY = os.getenv("GEMINI_API_KEY")
+# Gemini API Key
+api_key = os.getenv("GEMINI_API_KEY")
 
-if API_KEY:
-    genai.configure(api_key=API_KEY)
-    model = genai.GenerativeModel("gemini-2.5-flash")
-else:
-    model = None
+# Initialize Gemini client
+client = genai.Client(api_key=api_key)
 
 
-# ----------------------------
-# SIMPLE TESTABLE FUNCTION
-# ----------------------------
-def generate_plan(destination, days):
+def generate_itinerary(
+    destination,
+    budget,
+    days,
+    travelers,
+    travel_style,
+    interests,
+    language="English",
+):
     """
-    Generates a simple structured travel plan.
-    Designed for easy testing and coverage.
-    """
-    if not destination or days <= 0:
-        return {"destination": destination, "days": days, "plan": []}
-
-    plan = []
-    for i in range(days):
-        plan.append(f"Day {i + 1}: Explore {destination}")
-
-    return {"destination": destination, "days": days, "plan": plan}
-
-
-# ----------------------------
-# Generate Itinerary (Gemini)
-# ----------------------------
-def generate_itinerary(destination, budget, days, travelers, travel_style, interests):
-    if model is None:
-        return "❌ API key not found. Check your .env file."
-
-    prompt = f"""
-    Create a detailed travel itinerary.
-
-    Destination: {destination}
-    Budget: {budget}
-    Days: {days}
-    Travelers: {travelers}
-    Travel Style: {travel_style}
-    Interests: {", ".join(interests)}
+    Generate an AI-powered travel itinerary.
     """
 
     try:
-        response = model.generate_content(prompt)
-        return response.text
+        prompt = f"""
+You are an expert travel planner.
 
-    except Exception:
-        return "❌ Error generating itinerary"
+Generate a complete {days}-day travel itinerary.
 
+Destination: {destination}
+Budget: ₹{budget}
+Number of Travelers: {travelers}
+Travel Style: {travel_style}
+Interests: {", ".join(interests)}
 
-# ----------------------------
-# Travel Assistant Chat
-# ----------------------------
-def travel_chat(destination, itinerary, question):
-    if model is None:
-        return "❌ Gemini API key not found. Check your .env file."
+IMPORTANT:
+- Respond ONLY in {language}.
+- Include:
+1. Day-wise itinerary
+2. Places to visit
+3. Food recommendations
+4. Estimated expenses
+5. Transportation suggestions
+6. Travel tips
+7. Best time to visit
+8. Safety tips
+"""
 
-    prompt = f"""
-    You are an expert travel assistant.
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt,
+        )
 
-    Destination:
-    {destination}
-
-    Current Itinerary:
-    {itinerary}
-
-    User Question:
-    {question}
-
-    Give a helpful travel-related answer.
-    """
-
-    try:
-        response = model.generate_content(prompt)
         return response.text
 
     except Exception as e:
-        return f"❌ Error generating response: {str(e)}"
+        return f"❌ Error generating itinerary: {e}"
+
+
+def generate_plan(destination, days):
+    """
+    Basic placeholder plan.
+    """
+    return {
+        "destination": destination,
+        "days": days,
+        "plan": [],
+    }
+
+
+def travel_chat(destination, question, itinerary=None):
+    """
+    AI Travel Assistant chat.
+    """
+
+    try:
+        prompt = f"""
+You are an expert travel assistant.
+
+Destination:
+{destination}
+
+Itinerary:
+{itinerary if itinerary else "No itinerary available."}
+
+User Question:
+{question}
+
+Answer clearly and helpfully.
+"""
+
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt,
+        )
+
+        return response.text
+
+    except Exception as e:
+        return f"❌ Error: {e}"

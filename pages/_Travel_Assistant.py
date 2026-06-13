@@ -22,24 +22,38 @@ st.session_state.language = st.sidebar.selectbox(
 
 lang_map = {"English": "en", "Hindi": "hi", "Telugu": "te"}
 
+# Load translations
 text = load_language(lang_map[st.session_state.language])
+
+# ----------------------------
+# DEBUG (Temporary)
+# ----------------------------
+
 
 # ----------------------------
 # Title
 # ----------------------------
-st.title(text["travel_assistant"])
+st.title(text.get("travel_assistant", "🤖 AI Travel Assistant"))
 
-st.write(text["travel_assistant_description"])
+st.write(
+    text.get(
+        "travel_assistant_description",
+        "Ask questions about your trip, destination, attractions, food, transportation, packing, weather, or travel tips.",
+    )
+)
 
 st.markdown("---")
 
 # ----------------------------
 # Trip Context
 # ----------------------------
-destination = st.session_state.get("destination", text["unknown_destination"])
+destination = st.session_state.get(
+    "destination", text.get("unknown_destination", "Unknown Destination")
+)
+
 itinerary = st.session_state.get("itinerary", "")
 
-st.info(f"{text['current_destination']}: {destination}")
+st.info(f"{text.get('current_destination', 'Current Destination')}: {destination}")
 
 # ----------------------------
 # Initialize Chat History
@@ -57,7 +71,9 @@ for message in st.session_state.chat_history:
 # ----------------------------
 # Chat Input
 # ----------------------------
-user_prompt = st.chat_input(text["chat_placeholder"])
+user_prompt = st.chat_input(
+    text.get("chat_placeholder", "Ask anything about your trip...")
+)
 
 if user_prompt:
     with st.chat_message("user"):
@@ -65,7 +81,7 @@ if user_prompt:
 
     st.session_state.chat_history.append({"role": "user", "content": user_prompt})
 
-    with st.spinner(text["thinking"]):
+    with st.spinner(text.get("thinking", "Thinking...")):
         response = travel_chat(
             destination=destination, itinerary=itinerary, question=user_prompt
         )
@@ -80,18 +96,18 @@ st.markdown("---")
 # ----------------------------
 # Suggested Questions
 # ----------------------------
-st.subheader(text["suggested_questions"])
+st.subheader(text.get("suggested_questions", "💡 Suggested Questions"))
 
 col1, col2 = st.columns(2)
 
 with col1:
-    st.write(f"• {text['q1']}")
-    st.write(f"• {text['q2']}")
-    st.write(f"• {text['q3']}")
-    st.write(f"• {text['q4']}")
+    st.write(f"• {text.get('q1', 'What should I pack?')}")
+    st.write(f"• {text.get('q2', 'Best local food to try?')}")
+    st.write(f"• {text.get('q3', 'Any hidden attractions?')}")
+    st.write(f"• {text.get('q4', 'How can I save money?')}")
 
 with col2:
-    st.write(f"• {text['q5']}")
-    st.write(f"• {text['q6']}")
-    st.write(f"• {text['q7']}")
-    st.write(f"• {text['q8']}")
+    st.write(f"• {text.get('q5', 'Best time to visit?')}")
+    st.write(f"• {text.get('q6', 'Local transportation options?')}")
+    st.write(f"• {text.get('q7', 'Safety tips?')}")
+    st.write(f"• {text.get('q8', 'Recommended restaurants?')}")
