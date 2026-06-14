@@ -124,36 +124,39 @@
 "travel_assistant_info": "Ask questions about your destination.",
 
 "app_footer": "Built with ❤️ using Streamlit and Gemini AI",
-  "app_title": "✈️ एआई ट्रैवल प्लानर",
+"trip_planner_title": "🗺️ AI Trip Planner",
+"trip_planner_description": "Generate a personalized travel itinerary using AI.",
 
-  "welcome_heading": "एआई ट्रैवल प्लानर में आपका स्वागत है",
+"destination": "📍 Destination",
+"budget": "💰 Budget (₹)",
+"days": "📅 Number of Days",
+"travelers": "👥 Number of Travelers",
 
-  "welcome_description": "एआई की मदद से अपनी यात्रा की योजना बनाएं।",
+"travel_style": "✨ Travel Style",
+"budget_style": "Budget",
+"standard_style": "Standard",
+"luxury_style": "Luxury",
 
-  "features_heading": "विशेषताएँ",
+"interests": "🎯 Interests",
 
-  "feature_trip_planner": "एआई ट्रिप प्लानर",
+"adventure": "Adventure",
+"food_interest": "Food",
+"nature": "Nature",
+"historical": "Historical",
+"shopping_interest": "Shopping",
+"beaches": "Beaches",
+"wildlife": "Wildlife",
+"photography": "Photography",
 
-  "feature_budget_tracker": "बजट ट्रैकर",
+"ai_provider": "🤖 AI Provider",
 
-  "feature_travel_assistant": "ट्रैवल असिस्टेंट",
+"generate_itinerary_btn": "🚀 Generate Itinerary",
 
-  "feature_pdf": "पीडीएफ डाउनलोड",
+"enter_destination": "Please enter destination.",
 
-  "feature_maps": "डेस्टिनेशन मैप्स",
+"trip_generated": "Trip generated successfully!",
 
-  "sidebar_navigation": "ऐप का उपयोग करने के लिए साइडबार का उपयोग करें।",
+"budget_breakdown": "💰 Budget Breakdown",
 
-  "select_page": "शुरू करने के लिए साइडबार से एक पेज चुनें।",
-
-  "trip_planner": "ट्रिप प्लानर",
-
-  "trip_planner_info": "जेमिनी एआई या ओलामा का उपयोग करके दिन-वार यात्रा योजना बनाएं।",
-
-  "budget_tracker_info": "यात्रा खर्च और बजट को ट्रैक करें।",
-
-  "travel_assistant_info": "अपने डेस्टिनेशन के बारे में सवाल पूछें।",
-
-  "app_footer": "❤️ के साथ बनाया गया Streamlit और Gemini AI द्वारा"
-
+"generated_itinerary": "🗺️ AI Generated Itinerary"
 }

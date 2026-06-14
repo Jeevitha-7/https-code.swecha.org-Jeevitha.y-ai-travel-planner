@@ -156,6 +156,41 @@
 
   "travel_assistant_info": "మీ గమ్యస్థానం గురించి ప్రశ్నలు అడగండి.",
 
-  "app_footer": "❤️ తో తయారు చేయబడింది Streamlit మరియు Gemini AI ఉపయోగించి"
+  "app_footer": "❤️ తో తయారు చేయబడింది Streamlit మరియు Gemini AI ఉపయోగించి",
+  "trip_planner_title": "🗺️ AI ట్రిప్ ప్లానర్",
+"trip_planner_description": "AI సహాయంతో వ్యక్తిగత ప్రయాణ ప్రణాళికను రూపొందించండి.",
+
+"destination": "📍 గమ్యం",
+"budget": "💰 బడ్జెట్ (₹)",
+"days": "📅 రోజుల సంఖ్య",
+"travelers": "👥 ప్రయాణికుల సంఖ్య",
+
+"travel_style": "✨ ప్రయాణ శైలి",
+"budget_style": "బడ్జెట్",
+"standard_style": "స్టాండర్డ్",
+"luxury_style": "లగ్జరీ",
+
+"interests": "🎯 ఆసక్తులు",
+
+"adventure": "సాహసం",
+"food_interest": "ఆహారం",
+"nature": "ప్రకృతి",
+"historical": "చారిత్రక",
+"shopping_interest": "షాపింగ్",
+"beaches": "బీచ్‌లు",
+"wildlife": "వన్యప్రాణులు",
+"photography": "ఫోటోగ్రఫీ",
+
+"ai_provider": "🤖 AI ప్రొవైడర్",
+
+"generate_itinerary_btn": "🚀 ప్రయాణ ప్రణాళిక రూపొందించండి",
+
+"enter_destination": "దయచేసి గమ్యస్థానాన్ని నమోదు చేయండి.",
+
+"trip_generated": "ప్రయాణ ప్రణాళిక విజయవంతంగా రూపొందించబడింది!",
+
+"budget_breakdown": "💰 బడ్జెట్ వివరాలు",
+
+"generated_itinerary": "🗺️ AI రూపొందించిన ప్రయాణ ప్రణాళిక"
 
 }

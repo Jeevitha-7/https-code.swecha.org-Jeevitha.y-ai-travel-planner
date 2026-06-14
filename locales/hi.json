@@ -155,7 +155,42 @@
 
   "travel_assistant_info": "अपने डेस्टिनेशन के बारे में सवाल पूछें।",
 
-  "app_footer": "❤️ के साथ बनाया गया Streamlit और Gemini AI द्वारा"
+  "app_footer": "❤️ के साथ बनाया गया Streamlit और Gemini AI द्वारा",
+  "trip_planner_title": "🗺️ एआई ट्रिप प्लानर",
+"trip_planner_description": "एआई का उपयोग करके व्यक्तिगत यात्रा योजना बनाएं।",
+
+"destination": "📍 गंतव्य",
+"budget": "💰 बजट (₹)",
+"days": "📅 दिनों की संख्या",
+"travelers": "👥 यात्रियों की संख्या",
+
+"travel_style": "✨ यात्रा शैली",
+"budget_style": "बजट",
+"standard_style": "स्टैंडर्ड",
+"luxury_style": "लक्ज़री",
+
+"interests": "🎯 रुचियाँ",
+
+"adventure": "रोमांच",
+"food_interest": "भोजन",
+"nature": "प्रकृति",
+"historical": "ऐतिहासिक",
+"shopping_interest": "खरीदारी",
+"beaches": "समुद्र तट",
+"wildlife": "वन्यजीव",
+"photography": "फोटोग्राफी",
+
+"ai_provider": "🤖 एआई प्रदाता",
+
+"generate_itinerary_btn": "🚀 यात्रा योजना बनाएं",
+
+"enter_destination": "कृपया गंतव्य दर्ज करें।",
+
+"trip_generated": "यात्रा सफलतापूर्वक बनाई गई!",
+
+"budget_breakdown": "💰 बजट विवरण",
+
+"generated_itinerary": "🗺️ एआई द्वारा बनाई गई यात्रा योजना"
 
 
 }

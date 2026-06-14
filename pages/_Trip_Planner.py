@@ -1,73 +1,157 @@
 import streamlit as st
 from utils.ai_generator import generate_itinerary
 from utils.budget_calculator import calculate_budget
+from utils.translator import load_language
 
-st.set_page_config(page_title="Trip Planner", page_icon="🗺️", layout="wide")
 
-st.title("🗺️ AI Trip Planner")
-st.write("Generate a personalized travel itinerary using AI.")
+# ----------------------------
+# Page Configuration
+# ----------------------------
+st.set_page_config(
+    page_title="Trip Planner",
+    page_icon="🗺️",
+    layout="wide",
+)
 
-# ---------------- Inputs ----------------
-destination = st.text_input("📍 Destination")
+# ----------------------------
+# Language Setup
+# ----------------------------
+if "language" not in st.session_state:
+    st.session_state.language = "English"
 
-budget = st.number_input("💰 Budget (₹)", min_value=1000, value=10000)
+lang_map = {
+    "English": "en",
+    "Hindi": "hi",
+    "Telugu": "te",
+}
 
-days = st.number_input("📅 Number of Days", min_value=1, value=3)
 
-travelers = st.number_input("👥 Number of Travelers", min_value=1, value=1)
+# ----------------------------
+# Language Selection
+# ----------------------------
+if "language" not in st.session_state:
+    st.session_state.language = "English"
 
-travel_style = st.selectbox("✨ Travel Style", ["Budget", "Standard", "Luxury"])
+st.session_state.language = st.sidebar.selectbox(
+    "🌐 Select Language",
+    ["English", "Hindi", "Telugu"],
+    index=["English", "Hindi", "Telugu"].index(st.session_state.language),
+    key="trip_language",
+)
 
-interests = st.multiselect(
-    "🎯 Interests",
+lang_map = {
+    "English": "en",
+    "Hindi": "hi",
+    "Telugu": "te",
+}
+
+text = load_language(lang_map[st.session_state.language])
+
+text = load_language(lang_map[st.session_state.language])
+
+# ----------------------------
+# Title
+# ----------------------------
+st.title(text["trip_planner_title"])
+st.write(text["trip_planner_description"])
+
+# ----------------------------
+# Inputs
+# ----------------------------
+destination = st.text_input(text["destination"])
+
+budget = st.number_input(
+    text["budget"],
+    min_value=1000,
+    value=10000,
+)
+
+days = st.number_input(
+    text["days"],
+    min_value=1,
+    value=3,
+)
+
+travelers = st.number_input(
+    text["travelers"],
+    min_value=1,
+    value=1,
+)
+
+travel_style = st.selectbox(
+    text["travel_style"],
     [
-        "Adventure",
-        "Food",
-        "Nature",
-        "Historical",
-        "Shopping",
-        "Beaches",
-        "Wildlife",
-        "Photography",
+        text["budget_style"],
+        text["standard_style"],
+        text["luxury_style"],
     ],
 )
+
+interests = st.multiselect(
+    text["interests"],
+    [
+        text["adventure"],
+        text["food_interest"],
+        text["nature"],
+        text["historical"],
+        text["shopping_interest"],
+        text["beaches"],
+        text["wildlife"],
+        text["photography"],
+    ],
+)
+
+# ----------------------------
+# AI Provider
+# ----------------------------
 if "ai_provider" not in st.session_state:
     st.session_state.ai_provider = "Gemini"
 
 st.session_state.ai_provider = st.sidebar.selectbox(
-    "🤖 AI Provider",
+    text["ai_provider"],
     ["Gemini", "Ollama"],
     index=["Gemini", "Ollama"].index(st.session_state.ai_provider),
 )
-# ---------------- Button ----------------
-if st.button("🚀 Generate Itinerary"):
+
+# ----------------------------
+# Generate Button
+# ----------------------------
+if st.button(text["generate_itinerary_btn"]):
     if not destination:
-        st.error("Please enter destination")
+        st.error(text["enter_destination"])
         st.stop()
 
-    # FIXED function call
     budget_data = calculate_budget(budget, days)
 
-    # FIXED variables (no undefined names)
     itinerary = generate_itinerary(
-        destination, budget, days, travelers, travel_style.lower(), interests
+        destination=destination,
+        budget=budget,
+        days=days,
+        travelers=travelers,
+        travel_style=travel_style,
+        interests=interests,
+        language=st.session_state.language,
     )
 
-    # Save in session
     st.session_state["budget"] = budget
     st.session_state["itinerary"] = itinerary
     st.session_state["destination"] = destination
 
-    st.success("Trip generated successfully!")
+    st.success(text["trip_generated"])
 
-    # ---------------- Budget ----------------
-    st.subheader("💰 Budget Breakdown")
+    # ----------------------------
+    # Budget Breakdown
+    # ----------------------------
+    st.subheader(text["budget_breakdown"])
 
-    st.write(f"Transport: ₹{budget_data}")
-    st.write(f"Hotel: ₹{budget_data}")
-    st.write(f"Food: ₹{budget_data}")
-    st.write(f"Activities: ₹{budget_data}")
+    st.write(f"{text['transport']}: ₹{budget_data}")
+    st.write(f"{text['hotel']}: ₹{budget_data}")
+    st.write(f"{text['food']}: ₹{budget_data}")
+    st.write(f"{text['activities']}: ₹{budget_data}")
 
-    # ---------------- Itinerary ----------------
-    st.subheader("🗺️ AI Generated Itinerary")
+    # ----------------------------
+    # Itinerary
+    # ----------------------------
+    st.subheader(text["generated_itinerary"])
+
     st.markdown(itinerary)
