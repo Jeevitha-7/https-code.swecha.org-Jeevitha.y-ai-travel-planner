@@ -1,11 +1,12 @@
-streamlit
-google-generativeai
 python-dotenv
 reportlab
 pandas
 folium
 streamlit-folium
 geopy
+google-genai
+ollama
+
 ruff
 mypy
 vulture
@@ -14,7 +15,7 @@ pylint
 flake8
 pyupgrade
 semgrep
+
 pytest
 pytest-cov
 coverage
-pip install ollama
