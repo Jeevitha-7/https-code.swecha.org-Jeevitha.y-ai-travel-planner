@@ -1,12 +1,15 @@
 python-dotenv
 reportlab
 pandas
+streamlit
+python-dotenv
+reportlab
+pandas
 folium
 streamlit-folium
 geopy
 google-genai
 ollama
-
 ruff
 mypy
 vulture
@@ -15,7 +18,6 @@ pylint
 flake8
 pyupgrade
 semgrep
-
 pytest
 pytest-cov
 coverage
