@@ -38,7 +38,10 @@ st.title(text.get("travel_assistant", "🤖 AI Travel Assistant"))
 st.write(
     text.get(
         "travel_assistant_description",
-        "Ask questions about your trip, destination, attractions, food, transportation, packing, weather, or travel tips.",
+        (
+            "Ask questions about your trip, destination, attractions, "
+            "food, transportation, packing, weather, or travel tips."
+        ),
     )
 )
 
