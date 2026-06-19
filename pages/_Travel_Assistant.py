@@ -59,6 +59,7 @@ itinerary = st.session_state.get("itinerary", "")
 st.info(f"{text.get('current_destination', 'Current Destination')}: {destination}")
 
 # ----------------------------
+
 # Initialize Chat History
 # ----------------------------
 if "chat_history" not in st.session_state:
