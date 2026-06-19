@@ -38,7 +38,10 @@ st.title(text.get("travel_assistant", "🤖 AI Travel Assistant"))
 st.write(
     text.get(
         "travel_assistant_description",
-        "Ask questions about your trip, destination, attractions, food, transportation, packing, weather, or travel tips.",
+        (
+            "Ask questions about your trip, destination, attractions, "
+            "food, transportation, packing, weather, or travel tips."
+        ),
     )
 )
 
@@ -56,6 +59,7 @@ itinerary = st.session_state.get("itinerary", "")
 st.info(f"{text.get('current_destination', 'Current Destination')}: {destination}")
 
 # ----------------------------
+
 # Initialize Chat History
 # ----------------------------
 if "chat_history" not in st.session_state:
