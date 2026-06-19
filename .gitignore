@@ -74,6 +74,8 @@ htmlcov/
 # Outputs
 # ==========================
 outputs/
+!outputs/trip_reports/
+!outputs/trip_reports/.gitkeep
 generated_itinerary.pdf
 
 # ==========================
