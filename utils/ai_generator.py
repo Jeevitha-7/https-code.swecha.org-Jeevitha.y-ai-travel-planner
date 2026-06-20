@@ -1,3 +1,4 @@
+
 import os
 
 import streamlit as st
@@ -10,14 +11,24 @@ from ollama import chat
 # -----------------------------
 load_dotenv()
 
+# -----------------------------
+# BYOK (Bring Your Own Key)
+# -----------------------------
+gemini_key = st.text_input(
+    "🔑 Enter your Gemini API Key",
+    type="password",
+    help="Enter your own Gemini API Key to use AI features."
+)
 
+# -----------------------------
 # Gemini API helper
+# -----------------------------
 def _get_gemini_client():
-    """Return a configured genai.Client or raise a clear error if API key missing."""
-    api_key = os.getenv("GEMINI_API_KEY")
+    api_key = gemini_key or os.getenv("GEMINI_API_KEY")
+
     if not api_key:
         raise ValueError(
-            "GEMINI_API_KEY is not set. Please set GEMINI_API_KEY in your environment or .env file."
+            "Please enter a Gemini API Key."
         )
 
     return genai.Client(api_key=api_key)
@@ -59,7 +70,7 @@ def generate_itinerary(
 ):
     """
     Generate AI-powered travel itinerary using
-    Gemini or Ollama based on sidebar selection.
+    Gemini or Ollama.
     """
 
     prompt = f"""
@@ -88,38 +99,26 @@ IMPORTANT:
 
     provider = st.session_state.get("ai_provider", "Gemini")
 
-    # Use Ollama if explicitly selected
+    # Ollama
     if provider == "Ollama":
         try:
             return generate_with_ollama(prompt)
         except Exception as e:
             return f"❌ Ollama error generating itinerary:\n{e}"
 
-    # Use Gemini when selected (or default)
-    if provider == "Gemini":
-        try:
-            client = _get_gemini_client()
-            response = client.models.generate_content(
-                model="gemini-2.5-flash",
-                contents=prompt,
-            )
-            return response.text
-        except Exception as e:
-            return f"❌ Gemini error generating itinerary:\n{e}"
-
-    # Unknown provider: try Gemini first, then Ollama as a fallback
+    # Gemini
     try:
         client = _get_gemini_client()
+
         response = client.models.generate_content(
             model="gemini-2.5-flash",
             contents=prompt,
         )
+
         return response.text
-    except Exception:
-        try:
-            return generate_with_ollama(prompt)
-        except Exception as e:
-            return f"❌ Error generating itinerary:\n{e}"
+
+    except Exception as e:
+        return f"❌ Gemini error generating itinerary:\n{e}"
 
 
 # -----------------------------
@@ -159,35 +158,23 @@ Answer clearly and helpfully.
 
     provider = st.session_state.get("ai_provider", "Gemini")
 
-    # Ollama explicitly
+    # Ollama
     if provider == "Ollama":
         try:
             return generate_with_ollama(prompt)
         except Exception as e:
             return f"❌ Ollama error:\n{e}"
 
-    # Gemini explicitly
-    if provider == "Gemini":
-        try:
-            client = _get_gemini_client()
-            response = client.models.generate_content(
-                model="gemini-2.5-flash",
-                contents=prompt,
-            )
-            return response.text
-        except Exception as e:
-            return f"❌ Gemini error:\n{e}"
-
-    # Unknown provider: try Gemini then Ollama
+    # Gemini
     try:
         client = _get_gemini_client()
+
         response = client.models.generate_content(
             model="gemini-2.5-flash",
             contents=prompt,
         )
+
         return response.text
-    except Exception:
-        try:
-            return generate_with_ollama(prompt)
-        except Exception as e:
-            return f"❌ Error:\n{e}"
+
+    except Exception as e:
+        return f"❌ Gemini error:\n{e}"
