@@ -1,3 +1,14 @@
+---
+title: AI Travel Planner
+emoji: ✈️
+colorFrom: blue
+colorTo: green
+sdk: streamlit
+sdk_version: "1.46.1"
+python_version: "3.11"
+app_file: app.py
+pinned: false
+---
 # ✈️ AI Travel Planner
 
 AI Travel Planner is a Streamlit-based web application that helps users plan trips effortlessly using Artificial Intelligence.
