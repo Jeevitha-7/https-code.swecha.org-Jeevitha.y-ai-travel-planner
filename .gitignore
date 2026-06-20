@@ -123,4 +123,5 @@ docker-compose.override.yml
 # ==========================
 ehthumbs.db
 # Node.js
+node_modules/
 node_modules/installed_packages.txt
