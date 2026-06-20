@@ -1,0 +1,126 @@
+# ==========================
+# Python
+# ==========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# ==========================
+# Virtual Environments
+# ==========================
+venv/
+.venv/
+env/
+ENV/
+
+# ==========================
+# Environment Variables
+# ==========================
+.env
+.env.*
+!.env.example
+
+# ==========================
+# Streamlit
+# ==========================
+.streamlit/secrets.toml
+
+# ==========================
+# IDEs & Editors
+# ==========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==========================
+# OS Files
+# ==========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==========================
+# Python Build Files
+# ==========================
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# ==========================
+# Testing & Coverage
+# ==========================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# ==========================
+# Jupyter
+# ==========================
+.ipynb_checkpoints/
+
+# ==========================
+# Logs
+# ==========================
+*.log
+
+# ==========================
+# Outputs
+# ==========================
+outputs/
+!outputs/trip_reports/
+!outputs/trip_reports/.gitkeep
+generated_itinerary.pdf
+
+# ==========================
+# Temporary Files
+# ==========================
+tmp/
+temp/
+*.tmp
+
+# ==========================
+# Caches
+# ==========================
+.cache/
+.mypy_cache/
+.ruff_cache/
+
+# ==========================
+# Gitleaks Reports
+# ==========================
+gitleaks-report.json
+
+# ==========================
+# Bandit Reports
+# ==========================
+bandit-report.json
+
+# ==========================
+# pip-audit Reports
+# ==========================
+pip-audit-report.json
+
+# ==========================
+# Docker
+# ==========================
+docker-compose.override.yml
+
+# ==========================
+# Mac
+# ==========================
+.AppleDouble
+.LSOverride
+
+# ==========================
+# Windows
+# ==========================
+ehthumbs.db
+# Node.js
+node_modules/

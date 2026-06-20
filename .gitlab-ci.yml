@@ -1,0 +1,52 @@
+image: python:3.12
+
+stages:
+  - format
+  - lint
+  - type_check
+  - test
+  - coverage
+  - security
+
+before_script:
+  - python --version
+  - pip install -r requirements.txt
+  - pip install ruff mypy bandit pylint flake8 pytest pytest-cov pip-audit
+
+format:
+  stage: format
+  script:
+    - ruff format --check .
+
+lint:
+  stage: lint
+  script:
+    - ruff check .
+    - flake8 .
+    - pylint app.py pages utils
+
+type_check:
+  stage: type_check
+  script:
+    - mypy .
+
+test:
+  stage: test
+  script:
+    - pytest
+
+coverage:
+  stage: coverage
+  script:
+    - pytest --cov=. --cov-report=term --cov-report=xml
+
+dependency_audit:
+  stage: security
+  script:
+    - pip-audit
+
+gitleaks:
+  stage: security
+  image: zricethezav/gitleaks:latest
+  script:
+    - gitleaks detect --source . --no-git

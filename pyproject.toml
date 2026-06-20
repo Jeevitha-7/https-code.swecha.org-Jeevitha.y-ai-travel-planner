@@ -1,0 +1,23 @@
+[tool.vulture]
+exclude = [
+    ".venv/",
+    "venv/",
+    "__pycache__/",
+    ".git/"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["."]
+
+[tool.coverage.report]
+fail_under = 1
+show_missing = true
+omit = [
+    "app.py",
+    "utils/*",
+    "tests/*"
+]

@@ -1,0 +1,33 @@
+{
+  "name": "ai-travel-planner",
+  "version": "1.0.0",
+  "description": "AI Travel Planner is a Streamlit-based web application that helps users plan trips effortlessly using Artificial Intelligence.",
+  "main": "index.js",
+  "type": "commonjs",
+  "dependencies": {
+    "i18next": "^26.3.1",
+    "react-i18next": "^17.0.8"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.16",
+    "eslint": "^10.4.1",
+    "husky": "^9.1.7",
+    "knip": "^6.16.1",
+    "oxlint": "^1.69.0",
+    "prettier": "^3.8.4"
+  },
+  "scripts": {
+    "test": "pytest",
+    "coverage": "pytest --cov=. --cov-report=term --cov-report=xml",
+    "biome": "biome check .",
+    "lint": "eslint .",
+    "format": "prettier --check ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://code.swecha.org/Jeevitha.y/ai-travel-planner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
