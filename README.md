@@ -287,6 +287,70 @@ If you'd like, I can generate a ready-to-use Render `service.yaml` or a GitHub A
 5. Download the itinerary as a PDF.
 
 ---
+## 🤖 Agent Development Kit (ADK) Integration
+
+This project includes an AI Travel Agent built using an Agent-based architecture.
+
+### Agent Features
+
+* Travel itinerary generation
+* Budget estimation
+* Destination recommendations
+* Travel assistance through natural language interaction
+* Memory-ready architecture for user preferences
+* Tool orchestration support
+
+### Agent Workflow
+
+User Query
+→ Travel Agent
+→ Reasoning Process
+→ Travel Planning Tools
+→ Response Generation
+
+### Agent Demo
+
+Users can interact with the AI Travel Agent directly from the application home page by entering travel-related queries.
+
+Example:
+
+Input:
+Plan a 3-day trip to Goa for 2 people under ₹15,000
+
+Output:
+A personalized itinerary with budget recommendations and travel suggestions.
+
+---
+
+## 🔑 BYOK (Bring Your Own Key)
+
+The application supports BYOK for Gemini API access.
+
+Users can provide their own Gemini API key directly within the application to access AI-powered features.
+
+Required Key:
+
+* Google Gemini API Key
+
+Benefits:
+
+* No shared API dependency
+* Better privacy
+* User-controlled AI access
+* Easy deployment on different environments
+
+---
+
+## 🧠 Local AI Support (Optional)
+
+The project architecture is designed to support local AI inference using tools such as:
+
+* Ollama
+* Local LLMs
+* Gemini API
+
+This allows future deployment without relying entirely on external AI services.
+---
 
 ## 📈 Future Enhancements
 
@@ -311,13 +375,12 @@ Developed as a Hackathon Project.
 
 ### Team Members
 
-* Member 1
-* Member 2
+* Jeevitha.Y
+* Dhruva.G
 
 ---
 
 ## 📄 License
 
 This project is developed for educational and hackathon purposes.
-# runner test
 
