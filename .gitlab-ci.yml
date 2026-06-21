@@ -9,7 +9,6 @@ stages:
   - security
 
 before_script:
-  before_script:
   - python3 --version
   - python3 -m pip install -r requirements.txt
   - python3 -m pip install ruff mypy bandit pylint flake8 pytest pytest-cov pip-audit
