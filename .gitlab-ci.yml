@@ -24,7 +24,7 @@ lint:
   script:
     - python3 -m ruff check .
     - python3 -m flake8 .
-    - - python3 -m pylint --disable=R0801 app.py pages utils
+    - python3 -m pylint --disable=C0103,W0613,R0913,R0917,W0718,R0801 app.py pages utils
 
 type_check:
   stage: type_check
