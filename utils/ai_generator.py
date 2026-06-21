@@ -1,4 +1,3 @@
-
 import os
 
 import streamlit as st
@@ -17,8 +16,9 @@ load_dotenv()
 gemini_key = st.text_input(
     "🔑 Enter your Gemini API Key",
     type="password",
-    help="Enter your own Gemini API Key to use AI features."
+    help="Enter your own Gemini API Key to use AI features.",
 )
+
 
 # -----------------------------
 # Gemini API helper
@@ -27,9 +27,7 @@ def _get_gemini_client():
     api_key = gemini_key or os.getenv("GEMINI_API_KEY")
 
     if not api_key:
-        raise ValueError(
-            "Please enter a Gemini API Key."
-        )
+        raise ValueError("Please enter a Gemini API Key.")
 
     return genai.Client(api_key=api_key)
 
