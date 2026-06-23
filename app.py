@@ -1,5 +1,6 @@
-from agent.agent import travel_agent
 import streamlit as st
+
+from agent.agent import travel_agent
 from utils.translator import load_language
 
 # ----------------------------
@@ -100,9 +101,9 @@ if st.button("Run Agent"):
     if user_query:
         with st.spinner("Agent is thinking..."):
             try:
-                response = travel_agent.run(user_query)
+                result = travel_agent.run(user_query)
                 st.success("Agent Response")
-                st.write(response)
+                st.write(result)
             except Exception as e:
                 st.error(f"Agent Error: {e}")
 st.caption(text["app_footer"])
