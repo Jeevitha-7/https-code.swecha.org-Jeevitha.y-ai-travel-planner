@@ -1,4 +1,3 @@
-cat > .semgrep.yml << 'EOF'
 rules:
   - id: python-security-check
     pattern: eval(...)
@@ -6,4 +5,3 @@ rules:
     severity: ERROR
     languages:
       - python
-EOF

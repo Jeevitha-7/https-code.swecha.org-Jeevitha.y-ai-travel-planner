@@ -12,7 +12,7 @@ before_script:
   - export PATH="/Library/Frameworks/Python.framework/Versions/3.14/bin:$PATH"
   - python3 --version
   - python3 -m pip install -r requirements.txt
-  - python3 -m pip install ruff mypy bandit pylint flake8 pytest pytest-cov pip-audit
+  - python3 -m pip install ruff mypy bandit pylint flake8 pytest pytest-cov pip-audit semgrep
 
 format:
   stage: format
@@ -44,7 +44,12 @@ coverage:
 dependency_audit:
   stage: security
   script:
-    - python3 -m pip_audit
+    - python3 -m pip_audit 
+      
+semgrep:
+  stage: security
+  script:
+    - semgrep scan --config .semgrep.yml .
 
 gitleaks:
   stage: security
