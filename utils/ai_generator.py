@@ -27,7 +27,7 @@ def _get_gemini_client():
     api_key = gemini_key or os.getenv("GEMINI_API_KEY")
 
     if not api_key:
-        raise ValueError("Please enter a Gemini API Key.")
+        raise ValueError("Please enter a Gemini API key.")
 
     return genai.Client(api_key=api_key)
 

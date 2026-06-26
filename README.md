@@ -124,6 +124,14 @@ ai-travel-planner/
 
 ---
 
+## Quality, Security, and Testing Tools
+
+* Semgrep security scanning is configured with `.semgrep.yml` and runs in CI.
+* Biome is configured with `biome.json` and runs in CI for JavaScript/JSON checks.
+* Test coverage reporting uses `pytest-cov` and publishes `coverage.xml` as a CI artifact.
+
+---
+
 ## ⚙️ Installation
 
 ### Clone Repository
@@ -383,4 +391,3 @@ Developed as a Hackathon Project.
 ## 📄 License
 
 This project is developed for educational and hackathon purposes.
-

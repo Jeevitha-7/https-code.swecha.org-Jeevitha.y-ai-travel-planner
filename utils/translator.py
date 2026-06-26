@@ -7,3 +7,7 @@ def load_language(lang):
 
     with open(path, encoding="utf-8") as file:
         return json.load(file)
+
+
+def translate_text(text, _target_language):
+    return text

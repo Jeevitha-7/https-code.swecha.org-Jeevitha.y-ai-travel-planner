@@ -20,7 +20,9 @@
     "test": "pytest",
     "coverage": "pytest --cov=. --cov-report=term --cov-report=xml",
     "biome": "biome check .",
+    "tool:biome": "biome check .",
     "semgrep": "SEMGREP_SEND_METRICS=off semgrep scan --config .semgrep.yml .",
+    "tool:semgrep": "SEMGREP_SEND_METRICS=off semgrep scan --config .semgrep.yml .",
     "lint": "eslint .",
     "format": "prettier --check ."
   },

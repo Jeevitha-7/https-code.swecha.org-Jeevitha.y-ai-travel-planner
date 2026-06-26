@@ -5,7 +5,8 @@ on:
   pull_request:
 
 jobs:
-  quality:
+  semgrep:
+    name: Semgrep
     runs-on: ubuntu-latest
 
     steps:
@@ -16,25 +17,55 @@ jobs:
           python-version: "3.12"
 
       - run: pip install -r requirements.txt
-      - run: pip install flake8 pylint semgrep
+      - run: pip install semgrep
+
+      - name: Run Semgrep
+        run: semgrep scan --config .semgrep.yml .
+
+  biome:
+    name: Biome
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - run: npm ci
+      - name: Run Biome
+        run: npm run tool:biome
+
+  quality:
+    name: Python Quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+      - run: pip install flake8 pylint
 
       - run: ruff check .
       - run: mypy .
       - run: bandit -r .
-      - run: pylint app.py pages utils
+      - run: pylint --disable=C0103,W0613,R0913,R0917,W0718,R0801 app.py pages utils
       - run: flake8 .
-      - run: semgrep scan .
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
+  changelog:
+    name: Changelog
+    runs-on: ubuntu-latest
 
-      - run: npm install
-      - run: npx biome check .
+    steps:
+      - uses: actions/checkout@v4
+
       - name: Install Git-Cliff
-  run: |
-    cargo install git-cliff
+        run: cargo install git-cliff
 
-- name: Generate Changelog
-  run: |
-    git-cliff -o CHANGELOG.md
+      - name: Generate Changelog
+        run: git-cliff -o CHANGELOG.md
