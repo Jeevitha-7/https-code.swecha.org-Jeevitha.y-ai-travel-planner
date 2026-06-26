@@ -13,7 +13,7 @@ before_script:
   - python3 -m pip install --upgrade "pip>=26.1.2"
   - python3 -m pip --version
   - python3 -m pip install -r requirements.txt
-  - python3 -m pip install ruff mypy bandit pylint flake8 pytest pytest-cov pip-audit
+  - python3 -m pip install ruff mypy bandit pylint flake8 pytest pytest-cov pip-audit semgrep
 
 format:
   stage: format
@@ -39,8 +39,25 @@ test:
 
 coverage:
   stage: coverage
+  coverage: '/TOTAL.*\s+(\d+(?:\.\d+)?)%/'
   script:
     - python3 -m pytest --cov=. --cov-report=term --cov-report=xml
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
+    paths:
+      - coverage.xml
+
+biome:
+  image: node:22
+  stage: lint
+  before_script:
+    - node --version
+    - npm ci
+  script:
+    - npm run biome
 
 dependency_audit:
   stage: security
@@ -49,6 +66,8 @@ dependency_audit:
       
 semgrep:
   stage: security
+  variables:
+    SEMGREP_SEND_METRICS: "off"
   script:
     - semgrep scan --config .semgrep.yml .
 

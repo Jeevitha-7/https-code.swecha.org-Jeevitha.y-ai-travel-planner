@@ -41,3 +41,15 @@ repos:
     hooks:
      - id: pyupgrade
        exclude: ^(node_modules|\.venv)/
+  - repo: local
+    hooks:
+      - id: semgrep
+        name: semgrep
+        entry: semgrep scan --config .semgrep.yml
+        language: system
+        pass_filenames: false
+      - id: biome
+        name: biome
+        entry: npx biome check .
+        language: system
+        pass_filenames: false
